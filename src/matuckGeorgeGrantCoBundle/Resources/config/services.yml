@@ -1,0 +1,4 @@
+services:
+#    matuck_george_grant_co.example:
+#        class: matuckGeorgeGrantCoBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

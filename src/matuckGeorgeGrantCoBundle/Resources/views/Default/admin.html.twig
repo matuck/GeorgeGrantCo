@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Welcome to the Admin Panel</h1>
+    <div>
+        {{ form_start(form) }}
+        <label>Site Email: </label>{{ form_widget(form.value) }}
+        <button type="submit" value="Submit" class="btn btn-primary pull-right">Save</button>
+        {{ form_end(form) }}
+    </div>
+    <div>
+        {{ form_start(footerform) }}
+        <label>Site Footer<label>{{ form_widget(footerform.value) }}
+        <button type="submit" value="Submit" class="btn btn-primary pull-right">Save</button>
+        {{ form_end(footerform) }}
+    </div>
+    <div>
+        {{ form_start(keywordsform) }}
+        <label>Site Keywords</label>{{ form_widget(keywordsform.value) }}
+                <button type="submit" value="Submit" class="btn btn-primary pull-right">Save</button>
+                {{ form_end(keywordsform) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Previous Product version for {{ product.name }}</h1>
+    <div class="versions">
+        <table class="table">
+            <tr>
+                <th>Version</th>
+                <th>Date</th>
+                <th>User</th>
+            </tr>
+        {% for version in versions %}
+            <tr>
+                <td><a href="{{ path('adminproductPreviousView', {'id': product.id, 'version': version.version }) }}" class="btn btn-primary" role="button">View</a></td>
+                <td>{{ version.version }}</td>
+                <td>{{ version.loggedAt |date('m-d-Y g:i a') }}</td>
+                <td>{{ version.username }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}

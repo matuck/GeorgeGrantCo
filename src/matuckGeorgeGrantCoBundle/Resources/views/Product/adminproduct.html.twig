@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Manage Products</h1>
+    <div class="productlist">
+        {% for product in products %}
+            <div>
+                <span>
+                    {{ product.name }}
+                </span>
+                <span>
+                    {{ product.category.name }}
+                </span>
+                <a href="{{ path('adminproductPrevious', {'id': product.id }) }}" class="btn btn-primary" role="button">Previous Version</a>
+                <a href="{{ path('adminproductEdit', {'id': product.id }) }}" class="btn btn-primary" role="button">Edit</a>
+                <a href="{{ path('adminproductDelete', {'id': product.id }) }}" class="btn btn-primary" role="button">Delete</a>
+            </div>
+        {% endfor %}
+        <a href="{{ path('adminproductCreate') }}" class="btn btn-primary" role="button">Create New Product</a>
+    </div>
+{% endblock %}

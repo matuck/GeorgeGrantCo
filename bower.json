@@ -1,0 +1,23 @@
+{
+  "name": "GeorgeGrantCo",
+  "description": "Company Website",
+  "main": "",
+  "moduleType": [],
+  "authors": [
+    "Mitchell Tuck"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}

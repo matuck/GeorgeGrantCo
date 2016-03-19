@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Request More Information</h1>
+    <div>
+        {{ form_start(form) }}
+        <div class="row">
+        {{ form_row(form.Name) }}
+        {{ form_row(form.Title) }}
+        {{ form_row(form.Company) }}
+        {{ form_row(form.Address) }}
+        {{ form_row(form.CityStateZip) }}
+        {{ form_row(form.Telephone) }}
+        {{ form_row(form.Fax) }}
+        {{ form_row(form.Email) }}
+        {{ form_row(form.Comments) }}
+        {{ form_row(form.captchaCode) }}
+        </div>
+        <div class="row">
+            <button type="reset" value="Submit" class="btn btn-primary pull-right">Reset</button>
+            <button type="submit" value="Submit" class="btn btn-primary pull-right">Send</button>
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Manage Categories</h1>
+    <div class="productcategorylist">
+        {% for category in categories %}
+            <div>
+                <span>
+                    <a href="{{ path('productcategoryView', {'slug': category.slug }) }}">{{ category.name }}</a>
+                </span>
+                <a href="{{ path('adminproductcategoryPrevious', {'id': category.id }) }}" class="btn btn-primary" role="button">Previous Version</a>
+                <a href="{{ path('adminproductsort', {'id': category.id }) }}" class="btn btn-primary" role="button">Sort Products</a>
+                <a href="{{ path('adminproductcategoryEdit', {'id': category.id }) }}" class="btn btn-primary" role="button">Edit</a>
+                <a href="{{ path('adminproductcategoryDelete', {'id': category.id }) }}" class="btn btn-primary" role="button">Delete</a>
+            </div>
+        {% endfor %}
+        <a href="{{ path('adminproductcategoryCreate') }}" class="btn btn-primary" role="button">Create New Category</a>
+    </div>
+{% endblock %}

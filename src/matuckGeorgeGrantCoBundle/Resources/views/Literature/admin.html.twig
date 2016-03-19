@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Admin Literature</h1>
+    <div>
+        <a href="{{ path('adminliteratureAdd') }}" class="btn btn-primary" role="button">Add New Literature</a>
+    </div>
+    <h3>Drag the literature into the order you want then click save.</h3>
+    <div class="literature">
+        <form name="form" method="post">
+            <ul dropzone="move">
+                {% for literature in literatures %}
+                    <li draggable="true"  ondragstart="dragStarted(event)" ondragover="draggingOver(event)" ondrop="dropped(event)">
+                        <a href="{{ path('adminliteratureEdit', {'id': literature.id }) }}" class="btn btn-primary" role="button"><span class="glyphicon glyphicon-edit" /></a>
+                        <a href="{{ path('adminliteratureDelete', {'id': literature.id }) }}" class="btn btn-danger" role="button"><span class="glyphicon glyphicon-trash" /></a>
+                        <input type="hidden" name="order[]" value="{{ literature.id }}" />
+                        {{ literature.title }}
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="row">
+                <button type="submit" value="Submit" class="btn btn-primary pull-right">Save</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        var source;
+        console = window.console;
+        window.console.log('boo');
+        function dragStarted(evt){
+            console.log("dragStart");
+            console.log('test');
+            //start drag
+            source=evt.target;
+            //set data
+            evt.dataTransfer.setData("text/plain", evt.target.innerHTML);
+            //specify allowed transfer
+            evt.dataTransfer.effectAllowed = "move";
+        }
+        function draggingOver(evt){
+            //drag over
+            evt.preventDefault();
+            //specify operation
+            evt.dataTransfer.dropEffect = "move";
+        }
+        function dropped(evt){
+            console.log('boo');
+            console.log(evt);
+            //drop
+            evt.preventDefault();
+            evt.stopPropagation();
+            //update text in dragged item
+            source.innerHTML = evt.target.innerHTML;
+            //update text in drop target
+            evt.target.innerHTML = evt.dataTransfer.getData("text/plain");
+            console.log(evt.dataTransfer.getData("text/plain"));
+        }
+    </script>
+{% endblock %}

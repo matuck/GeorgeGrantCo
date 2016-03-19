@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Edit Literature</h1>
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    <div>
+        <div>{{ form_label(form.cover) }}</div>
+        <div><img id="coverimage" name="coverimage" src="" /></div>
+        <div><small>Click the image above to change the coverimage.</small></div>
+    </div>
+    {{ form_row(form.file) }}
+
+    <div class="hidden">
+        {{ form_rest(form) }}
+    </div>
+    <a href="{{ path('adminliterature') }}" class="btn btn-primary pull-right" role="button">Cancel</a>
+    <button type="submit" value="Submit" class="btn btn-primary pull-right">Save</button>
+    {{ form_end(form) }}
+    <script>
+        function setLogoImage() {
+            console.log($("#coverimage").val());
+            if ($("#literature_cover").val() != undefined && $("#literature_cover").val() != "") {
+                $("#coverimage").attr("src", $("#literature_cover").val());
+            } else {
+                $("#coverimage").attr("src", "/uploads/noimage.png");
+            }
+        }
+        $('#literature_cover').bind('change', function(e) {
+            setLogoImage();
+        });
+
+        $('[id="coverimage"]').on("click",function() {
+            var childWin = window.open("/elfinder/litform?id=literature_cover", "popupWindow", "height=450, width=900");
+        });
+        setLogoImage();
+    </script>
+{% endblock %}

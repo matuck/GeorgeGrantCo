@@ -1,0 +1,39 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Edit Product</h1>
+    {{ form_start(productform) }}
+        {{ form_row(productform.name) }}
+        {{ form_row(productform.category) }}
+        <div>
+            <div>{{ form_label(productform.logo) }}</div>
+            <div><img id="logoimage" name="logoimage" src="" /></div>
+            <div><small>Click the image above to change the logo.</small></div>
+        </div>
+        {{ form_row(productform.url) }}
+        {{ form_row(productform.displayurl) }}
+        {{ form_row(productform.content) }}
+    <div class="hidden">
+        {{ form_widget(productform) }}
+    </div>
+    <a href="{{ path('adminproduct') }}" class="btn btn-primary pull-right" role="button">Cancel</a>
+    <button type="submit" value="Submit" class="btn btn-primary pull-right">Save</button>
+    {{ form_end(productform) }}
+    <script>
+        function setLogoImage() {
+            if ($("#product_logo").val() != undefined && $("#product_logo").val() != "") {
+                $("#logoimage").attr("src", $("#product_logo").val());
+            } else {
+                $("#logoimage").attr("src", "/uploads/noimage.png");
+            }
+        }
+        $('#product_logo').bind('change', function(e) {
+            setLogoImage();
+        });
+
+        $('[id="logoimage"]').on("click",function() {
+            var childWin = window.open("/elfinder/form?id=product_logo", "popupWindow", "height=450, width=900");
+        });
+        setLogoImage();
+    </script>
+{% endblock %}

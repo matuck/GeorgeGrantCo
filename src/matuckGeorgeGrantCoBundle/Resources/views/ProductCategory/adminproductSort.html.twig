@@ -1,0 +1,45 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Sort products for {{ category.name }} category</h1>
+    <h3>Drag the products into the order you want then click save.</h3>
+    <div class="products">
+        <form name="form" method="post">
+            <ul dropzone="move">
+                {% for product in category.products %}
+                    <li draggable="true"  ondragstart="dragStarted(event)" ondragover="draggingOver(event)" ondrop="dropped(event)"><input type="hidden" name="order[]" value="{{ product.id }}" />{{ product.name }}</li>
+                {% endfor %}
+            </ul>
+            <div class="row">
+                <button type="submit" value="Submit" class="btn btn-primary pull-right">Save</button>
+            </div>
+            </form>
+
+    </div>
+    <script>
+        var source;
+        function dragStarted(evt){
+            //start drag
+            source=evt.target;
+            //set data
+            evt.dataTransfer.setData("text/plain", evt.target.innerHTML);
+            //specify allowed transfer
+            evt.dataTransfer.effectAllowed = "move";
+        }
+        function draggingOver(evt){
+            //drag over
+            evt.preventDefault();
+            //specify operation
+            evt.dataTransfer.dropEffect = "move";
+        }
+        function dropped(evt){
+            //drop
+            evt.preventDefault();
+            evt.stopPropagation();
+            //update text in dragged item
+            source.innerHTML = evt.target.innerHTML;
+            //update text in drop target
+            evt.target.innerHTML = evt.dataTransfer.getData("text/plain");
+        }
+    </script>
+{% endblock %}

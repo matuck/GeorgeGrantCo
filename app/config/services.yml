@@ -1,0 +1,64 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+      extension.listener:
+              class: matuckGeorgeGrantCoBundle\Listener\DoctrineExtensionListener
+              calls:
+                  - [ setContainer, [ "@service_container" ] ]
+              tags:
+                  # translatable sets locale after router processing
+                  - { name: kernel.event_listener, event: kernel.request, method: onLateKernelRequest, priority: -10 }
+                  # loggable hooks user username if one is in security context
+                  - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+                  # translatable sets locale such as default application locale before command execute
+                  - { name: kernel.event_listener, event: console.command, method: onConsoleCommand, priority: -10 }
+
+      gedmo.listener.tree:
+              class: Gedmo\Tree\TreeListener
+              tags:
+                  - { name: doctrine.event_subscriber, connection: default }
+              calls:
+                  - [ setAnnotationReader, [ @annotation_reader ] ]
+
+      gedmo.listener.translatable:
+          class: Gedmo\Translatable\TranslatableListener
+          tags:
+              - { name: doctrine.event_subscriber, connection: default }
+          calls:
+              - [ setAnnotationReader, [ @annotation_reader ] ]
+              - [ setDefaultLocale, [ %locale% ] ]
+              - [ setTranslationFallback, [ false ] ]
+
+      gedmo.listener.timestampable:
+          class: Gedmo\Timestampable\TimestampableListener
+          tags:
+              - { name: doctrine.event_subscriber, connection: default }
+          calls:
+              - [ setAnnotationReader, [ @annotation_reader ] ]
+
+      gedmo.listener.sluggable:
+              class: Gedmo\Sluggable\SluggableListener
+              tags:
+                  - { name: doctrine.event_subscriber, connection: default }
+              calls:
+                  - [ setAnnotationReader, [ "@annotation_reader" ] ]
+
+      gedmo.listener.loggable:
+              class: Gedmo\Loggable\LoggableListener
+              tags:
+                  - { name: doctrine.event_subscriber, connection: default }
+              calls:
+                  - [ setAnnotationReader, [ "@annotation_reader" ] ]
+
+      app.menu_builder:
+          class: matuckGeorgeGrantCoBundle\Menu\MenuBuilder
+          arguments: ["@knp_menu.factory", '@security.authorization_checker', '@security.access_map', "@doctrine.orm.entity_manager" ]
+          tags:
+              - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
+              - { name: knp_menu.menu_builder, method: adminMenu, alias: admin }

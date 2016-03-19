@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Create New Page</h1>
+    {{ form_start(pageform) }}
+        {{ form_row(pageform.title) }}
+        {{ form_row(pageform.content) }}
+        {{ form_row(pageform.home) }}
+    <div class="hidden">
+        {{ form_widget(pageform) }}
+    </div>
+    <a href="{{ path('adminpages') }}" class="btn btn-primary pull-right" role="button">Cancel</a>
+    <button type="submit" value="Submit" class="btn btn-primary pull-right">Save</button>
+    {{ form_end(pageform) }}
+{% endblock %}

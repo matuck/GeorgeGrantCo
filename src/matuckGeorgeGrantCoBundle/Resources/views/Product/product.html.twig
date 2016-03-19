@@ -1,0 +1,16 @@
+<div>
+    <div class="row">
+        <div  class="col-xs-4 hideoverflow text-center">
+            <img src="{{ product.logo|raw }}">
+        </div>
+        <div class="col-xs-4 hideoverflow text-center" style="height: 100%;">
+            <h2 class="nomargin">{{ product.name|raw }}</h2>
+        </div>
+        <div  class="col-xs-4 hideoverflow text-center">
+            <a target="_blank" href="{{ product.url|raw }}">{{ product.displayurl|raw }}</a>
+        </div>
+    </div>
+    <div class="row text-left">
+        {{ product.content|raw }}
+    </div>
+</div>

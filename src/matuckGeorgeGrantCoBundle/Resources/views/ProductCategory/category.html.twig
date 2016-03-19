@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>{{ category.name|raw }}</h1>
+    <div>
+        {{ category.pretext|raw }}
+    </div>
+    {% for product in category.products %}
+        {{ include('matuckGeorgeGrantCoBundle:Product:product.html.twig', { 'product': product }) }}
+        <hr />
+    {% endfor %}
+    <div>
+        {{ category.posttext|raw }}
+    </div>
+{% endblock %}

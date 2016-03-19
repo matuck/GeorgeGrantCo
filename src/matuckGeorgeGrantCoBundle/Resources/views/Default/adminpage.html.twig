@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Manage Pages</h1>
+    <div class="pagelist">
+        {% for page in pages %}
+            <div>
+                <span>
+                    <a href="{{ path('page', {'slug': page.slug }) }}">{{ page.title }}</a>
+                </span>
+                <a href="{{ path('adminpagesPrevious', {'id': page.id }) }}" class="btn btn-primary" role="button">Previous Version</a>
+                <a href="{{ path('adminpagesEdit', {'id': page.id }) }}" class="btn btn-primary" role="button">Edit Page</a>
+                <a href="{{ path('adminpagesDelete', {'id': page.id }) }}" class="btn btn-primary" role="button">Delete Page</a>
+                {% if not page.home %}
+                    <a href="{{ path('adminpagesSetHome', {'id': page.id }) }}" class="btn btn-primary" role="button">Set as HomePage</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <a href="{{ path('adminpagesCreate') }}" class="btn btn-primary" role="button">Create New Page</a>
+    </div>
+{% endblock %}

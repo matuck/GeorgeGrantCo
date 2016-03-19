@@ -1,0 +1,11 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1 class="alert">This is a previous version</h1>
+    {{ include('matuckGeorgeGrantCoBundle:Product:product.html.twig', { 'product': product }) }}
+    <div>
+        <a href="{{ path('adminproductPrevious', {'id': product.id }) }}" class="pull-right btn btn-primary" role="button">Previous Version</a>
+        <a href="{{ path('adminproduct') }}" class="pull-right btn btn-primary" role="button">Product List</a>
+        <a href="{{ path('adminproductPreviousRevert', {'id': product.id, 'version': version }) }}" class="pull-right btn btn-primary" role="button">Revert</a>
+    </div>
+{% endblock %}

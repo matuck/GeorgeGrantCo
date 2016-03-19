@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Manage the Menu</h1>
+    <div>
+        <a href="{{ path('adminmenuadd', {'id': menu.id }) }}" class="btn btn-primary" role="button">Add New Root Menu</a>
+    </div>
+    <div>
+        {% if menu.children %}
+            {{ include('matuckGeorgeGrantCoBundle:Menu:adminmenuEntry.html.twig', { 'menu': menu.children, 'top': menu.lft+1, 'bottom': menu.rgt-1 }) }}
+        {% endif %}
+    </div>
+{% endblock %}

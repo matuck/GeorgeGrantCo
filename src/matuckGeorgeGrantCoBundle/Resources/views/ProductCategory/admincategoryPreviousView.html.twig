@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1 class="alert">This is a previous version</h1>
+    <h1>{{ category.name }}</h1>
+    <div>
+        {{ category.description|raw }}
+    </div>
+    <div>
+        {{ category.pretext|raw }}
+    </div>
+    <div>
+        {{ category.posttext|raw }}
+    </div>
+    <div>
+        <a href="{{ path('adminproductcategoryPrevious', {'id': category.id }) }}" class="pull-right btn btn-primary" role="button">Previous Version</a>
+        <a href="{{ path('adminproductcategory') }}" class="pull-right btn btn-primary" role="button">Product Category List</a>
+        <a href="{{ path('adminproductcategoryPreviousRevert', {'id': category.id, 'version': version }) }}" class="pull-right btn btn-primary" role="button">Revert</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>Literature</h1>
+    {% for literature in literatures %}
+        <div class="col-xs-4">
+            <div class="literatureTitle text-center">
+                {{ literature.title }}
+            </div>
+            <div class="literatureLink">
+                <a target="_blank" href="{{ literature.file }}"><img src="{{ literature.cover }}" /></a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
